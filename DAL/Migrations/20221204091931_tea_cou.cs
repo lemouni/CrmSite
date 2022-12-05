@@ -10,7 +10,7 @@ namespace DAL.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false) 
+                    id = table.Column<int>(nullable: false)  
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     TotalTime = table.Column<float>(nullable: false),
