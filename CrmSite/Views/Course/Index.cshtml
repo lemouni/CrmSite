@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    Layout = "~/Views/Shared/_Layout-admin.cshtml";
+}
+<div class="col-md-12 col-xl-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Vertical Form</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="create" asp-controller="Course" method="post" enctype="multipart/form-data">
+
+
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="form-label">Title</label>
+                    <input type="text" name="Title" class="form-control" id="exampleInputEmail1" placeholder="Enter Name" autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="form-label">TotalTime</label>
+                    <input type="text" name="TotalTime" class="form-control" id="exampleInputPassword1" placeholder="Family" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="form-label">Descript</label>
+                    <input type="text" name="Descript" class="form-control" id="exampleInputPassword1" placeholder="Family" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="form-label">Price</label>
+                    <input type="text" name="Price" class="form-control" id="exampleInputPassword1" placeholder="Email" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="form-label">VideoIntro</label>
+                    <input type="file" name="VideoIntro" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="new-password">
+
+
+
+
+
+                    <div class="modal fade" id="modaldemo1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content modal-content-demo">
+                                <div class="modal-header">
+                                    <h6 class="modal-title">Message Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Why We Use Electoral College, Not Popular Vote</h6>
+                                    <br/>
+
+
+
+
+                                    @foreach (BE.Teacher item in ViewBag.Teachers)
+                                    {
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1" class="form-label">
+                                            <input type="checkbox" name="Teachers" class="form-control" value="@item.id">
+                                            <span>@item.Name</span>
+                                            </label>
+                                        </div>
+                                    }
+
+
+                                </div>
+
+                                    <button data-bs-dismiss="modal">save</button>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="text-center bg-light border">
+
+                        <a class="btn btn-primary btt" data-bs-target="#modaldemo1" data-bs-toggle="modal" @*onclick="edit('@item.id','@item.Name','@item.Family','@item.Email')"*@ href="javascript:void(0)">edit</a>
+                   </div>
+
+                    <button class="btn btn-primary mt-4 mb-0" type="submit">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,20 @@ namespace CrmSite
             var path = _webHostEnvironment.WebRootPath + "\\images\\teacher\\" +file.FileName;
             using var f = System.IO.File.Create(path);
             file.CopyTo(f);
+
+
             return file.FileName;
+        }
+        public string uploadVideo(IFormFile file)
+        {
+            if (file == null) return "";
+            var path = _webHostEnvironment.WebRootPath + "\\videos\\course\\" + file.FileName;
+            using var f = System.IO.File.Create(path);
+            file.CopyTo(f);
+
+            path = path.Split("wwwroot")[1];
+
+            return path;
         }
     }
 }

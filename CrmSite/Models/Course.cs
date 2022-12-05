@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BE;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BE
+namespace CrmSite.Models
 {
     public class Course
     {
@@ -10,9 +10,8 @@ namespace BE
         public string Title { get; set; }
         public float TotalTime { get; set; }
         public string Descript { get; set; }
-        public string VideoIntro { get; set; }
+        public IFormFile VideoIntro { get; set; }
         public float Price { get; set; }
-        public List<Course_DetailFile> files = new List<Course_DetailFile>();
-        public List<Teacher_Course> Teacher_Courses { get; set; }
+
     }
 }
