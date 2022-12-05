@@ -1,0 +1,230 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout-admin.cshtml";
+
+}
+@model List<BE.Teacher>
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Basic Datatable</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+
+                        <form asp-action="search" asp-controller="Teacher" method="get">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input name="s" type="text" class="form-control" placeholder="search">
+                                    <button class="btn btn-success my-1">search</button>
+                                </div>
+                            </div>
+                        </form>
+
+                         <div class="col-sm-12">
+                             <table class="table table-bordered text-nowrap border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+                                  <thead>
+                                      <tr role="row"><th class="wd-15p border-bottom-0 sorting sorting_asc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First name: activate to sort column descending" style="width: 108.438px;">First name</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" style="width: 102px;">Last name</th><th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 191.469px;">Email</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">Picture</th></tr>
+                                  </thead>
+                                  <tbody>
+                                      @{
+                                          foreach (var item in Model)
+                                          {
+                                                  <tr>
+                                                      <td style="display:none">@item.id</td>
+                                                      <td>@item.Name</td>
+                                                      <td>@item.Family</td>
+                                                      <td>@item.Email</td>
+                                                      <td><img src="~/images/teacher/@item.pic" style="width:50px;height:auto"/></td>
+                                                      <td>
+
+                                                           <div class="text-center py-4 bg-light border">
+                                                               <button class="btn btn-primary btt" data-bs-target="#modaldemo1" data-bs-toggle="modal" onclick="edit('@item.id','@item.Name','@item.Family','@item.Email')" href="javascript:void(0)">edit</button>
+                                                           </div>
+                                                      </td>
+                                                            <td>
+                                                            <form asp-action="dele" method="post">
+                                                                <div class="text-center py-4 bg-light border">
+                                                                    <input type="hidden" name="id" value="@item.id"/>
+                                                                    <button class="btn btn" type="submit" href="javascript:void(0)">delete</button>
+                                                                </div>
+                                                            </form>
+                                                            </td>
+                                                  </tr>
+                                  
+                                          }
+                                      }
+                                  
+                                  </tbody>
+                             </table>
+
+
+
+
+                            <div class="modal fade" id="modaldemo1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content modal-content-demo">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">Message Preview</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h6>Why We Use Electoral College, Not Popular Vote</h6>
+                                            <form asp-action="update" asp-controller="Teacher" id="edit" method="post" enctype="multipart/form-data">
+
+
+                                                <div class="form-group">
+                                                    <input type="hidden" name="id" id="id"/>
+                                                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                                                    <input type="text" name="Name" class="form-control" id="Name" placeholder="Enter Name" autocomplete="username">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1" class="form-label">Family</label>
+                                                    <input type="text" name="Family" class="form-control" id="Family" placeholder="Family" autocomplete="new-password">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1" class="form-label">Email</label>
+                                                    <input type="email" name="Email" class="form-control" id="Email" placeholder="Email" autocomplete="new-password">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                                    <input type="file" name="pic" class="form-control" id="pic" placeholder="Password" autocomplete="new-password">
+                                                    <button class="btn btn-primary mt-4 mb-0" type="submit">Submit</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                         </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                        </div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatable_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button page-item previous disabled" id="basic-datatable_previous"><a href="#" aria-controls="basic-datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                    @{
+                                        BLL.TeacherBLL bll = new BLL.TeacherBLL();
+                                        int f = bll.gettotal();
+                                        int count;
+                                        if (f % 10 == 0) count = f / 10;
+                                        else count = (f / 10) + 1;
+                                        for (var i = 0; i < count; i++)
+                                        {
+                                            <li class="paginate_button page-item active"><a href=@Url.Action("getskip","Teacher", new{c=i}) aria-controls="basic-datatable" data-dt-idx=@i tabindex="0" class="page-link">@i</a></li>
+
+                                        }
+                                    }
+                                        <li class="paginate_button page-item next" id="basic-datatable_next"><a href="#" aria-controls="basic-datatable" data-dt-idx="6" tabindex="0" class="page-link">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/plugins/input-mask/jquery.mask.min.js"></script>
+
+<script>
+        function edit(id, Name, Family, Email) {
+            $("#id").val(id);
+            $("#Name").val(Name);
+            $("#Family").val(Family);
+            $("#Email").val(Email);
+
+        }
+
+
+    //$(document).ready(function(){
+        //var idd;
+
+
+        //    String.prototype.toEnglishDigits = function () {
+        //        var num_dic = {
+        //            '۰': '0',
+        //            '۱': '1',
+        //            '۲': '2',
+        //            '۳': '3',
+        //            '۴': '4',
+        //            '۵': '5',
+        //            '۶': '6',
+        //            '۷': '7',
+        //            '۸': '8',
+        //            '۹': '9',
+        //        }
+        //        return parseInt(this.replace(/[۰-۹]/g, function (w) {
+        //            return num_dic[w]
+        //        }));
+        //    }
+
+
+
+            //$("form#edit").submit(function(e){
+            //    e.preventDefault();
+            //    var formData= new FormData(this);
+
+            //    formData.append("id" , idd);
+            //    formData.append("Name", $("#Name").val());
+            //    formData.append("Family", $("#Family").val());
+            //    formData.append("Email", $("#Email").val());
+            //    //alert(formData['Name']);
+            //    $.ajax({
+            //        type: "post",
+            //        enctype: "multipart/form-data",
+            //        dataType: "json",
+            //        url: "@Url.Action("update", "Teacher")",
+            //        data: formData,
+
+            //        contentType: false,
+            //        processData: false
+
+            //        complete: function myfunction(){
+            //            currentrow.find("td:eq(1)").text($("#Name").val());
+            //            currentrow.find("td:eq(2)").text($("#Family").val());
+            //            currentrow.find("td:eq(3)").text($("#Email").val());
+            //            var filename = $('#pic').val().split('\\').pop();
+            //            currentrow.find('img').attr('src',"/images/teacher" + filename);
+
+            //        }
+            //    });
+            //});
+
+
+            //$(".btt").click(function () {
+            //    //alert("kk");
+            //    var currentrow = $(this).closest("tr");
+            //    idd = currentrow.find("td:eq(0)").text().toEnglishDigits();
+            //    alert(idd);
+            //    $("#Name").val(currentrow.find("td:eq(1)").text());
+            //    $("#Family").val(currentrow.find("td:eq(2)").text());
+            //    $("#Email").val(currentrow.find("td:eq(3)").text());
+            //});
+    //});
+</script>
+}

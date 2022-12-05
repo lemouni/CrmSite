@@ -1,0 +1,44 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout-admin.cshtml";
+}
+<h2>create</h2>
+
+<br />
+
+@*<div class="row main-content app-content mt-0">*@
+    <div class="col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Vertical Form</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="create" asp-controller="Teacher" method="post" enctype="multipart/form-data">
+                
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="form-label">Name</label>
+                            <input type="text" name="Name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name" autocomplete="username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" class="form-label">Family</label>
+                            <input type="text" name="Family" class="form-control" id="exampleInputPassword1" placeholder="Family" autocomplete="new-password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" class="form-label">Email</label>
+                            <input type="email" name="Email" class="form-control" id="exampleInputPassword1" placeholder="Email" autocomplete="new-password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="file" name="pic" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="new-password">
+                    <button class="btn btn-primary mt-4 mb-0" type="submit">Submit</button>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
