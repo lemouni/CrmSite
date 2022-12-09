@@ -12,6 +12,7 @@ namespace CrmSite.Models
         public string Descript { get; set; }
         public IFormFile VideoIntro { get; set; }
         public float Price { get; set; }
+        public List<int> teachers { get; set; }
 
     }
 }

@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout-admin.cshtml";
+
+}
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Basic Datatable</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                             <form asp-action="search" asp-controller="Course" method="get">
+                                 <div class="row">
+                                     <div class="col-lg-12">
+                                         <input name="s" type="text" class="form-control" placeholder="search">
+                                         <button class="btn btn-success my-1">search</button>
+                                     </div>
+                                 </div>
+                             </form>
+                            <div class="col-sm-12">
+                                 <table class="table table-bordered text-nowrap border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+                                     <thead>
+                                         <tr role="row"><th class="wd-15p border-bottom-0 sorting sorting_asc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First name: activate to sort column descending" style="width: 108.438px;">First name</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" style="width: 102px;">Last name</th><th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 191.469px;">Email</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">Picture</th></tr>
+                                     </thead>
+                                     <tbody>
+                                         @{
+                                             foreach (BE.Course item in ViewBag.Course)
+                                             {
+                                                 <tr>
+                                                     <td style="display:none">@item.id</td>
+                                                     <td>@item.Title</td>
+                                                     <td>@item.TotalTime</td>
+                                                     <td>@item.Descript</td>
+                                                     <td>@item.Price</td>
+
+                                                     <td><video src="~/videos/course/@item.VideoIntro" style="width:150px;height:auto" /></td>
+                                                     <td>
+
+                                                         <div class="text-center py-4 bg-light border">
+
+                                                         </div>
+                                                     </td>
+                                                     <td>
+
+                                                     </td>
+                                                 </tr>
+
+                                             }
+                                         }
+
+                                     </tbody>
+                                 </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>

@@ -45,19 +45,16 @@ namespace DAL
             tt.Descript = t.Descript;
             db.SaveChanges();
         }
-        public List<Course> search(List<string>lstsearch)
+        public List<Course> search(string s)
         {
-            List<Course> te = new List<Course>();
-            foreach (var item in lstsearch)
-            {
+
                 DB db = new DB();
                 var q = from i in db.Courses
-                        where i.Title.Contains(item.ToString()) || i.Price == Convert.ToInt32(item)
+                        where i.Title.Contains(s)
                         select i;
-                te = te.Concat(q.ToList()).ToList();
-            }
 
-            return te;
+
+            return q.ToList();
         }
 
 

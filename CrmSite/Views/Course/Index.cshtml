@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="form-label">TotalTime</label>
-                    <input type="text" name="TotalTime" class="form-control" id="exampleInputPassword1" placeholder="Family" autocomplete="new-password">
+                    <input type="number" name="TotalTime" class="form-control" id="exampleInputPassword1" placeholder="Family" autocomplete="new-password">
                 </div>
 
                 <div class="form-group">
@@ -33,15 +33,43 @@
 
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="form-label">Price</label>
-                    <input type="text" name="Price" class="form-control" id="exampleInputPassword1" placeholder="Email" autocomplete="new-password">
+                    <input type="number" name="Price" class="form-control" id="exampleInputPassword1" placeholder="Email" autocomplete="new-password">
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="form-label">VideoIntro</label>
                     <input type="file" name="VideoIntro" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="new-password">
+                </div>
 
 
 
+                <div class="form-group">
+
+@*                <input hidden id="teachers" name="teachers" />
+*@
+
+
+                    @foreach (BE.Teacher item in ViewBag.Teachers)
+                    {
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" class="form-label">
+                                <input type="checkbox" name="Teachers" class="form-control" value="@item.id">
+                                <span>@item.Name</span>
+                            </label>
+                        </div>
+                    }
+
+                </div>
+
+
+
+                    <button class="btn btn-primary mt-4 mb-0" type="submit">Submit</button>
+
+            </form>
+                    <div class="text-center bg-light border">
+
+                        <button class="btn btn-primary" data-bs-target="#modaldemo1" data-bs-toggle="modal" @*onclick="edit('@item.id','@item.Name','@item.Family','@item.Email')"*@ href="javascript:void(0)">edit</button>
+                   </div>
 
 
                     <div class="modal fade" id="modaldemo1">
@@ -61,32 +89,45 @@
                                     {
                                         <div class="form-group">
                                             <label for="exampleInputPassword1" class="form-label">
-                                            <input type="checkbox" name="Teachers" class="form-control" value="@item.id">
+                                            <input type="checkbox" name="Teacherss" class="form-control" value="@item.id">
                                             <span>@item.Name</span>
                                             </label>
                                         </div>
                                     }
+                                             <button id="selectTeachers" data-bs-dismiss="modal">save1</button>
 
 
                                 </div>
 
-                                    <button data-bs-dismiss="modal">save</button>
                                 
                                 
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="text-center bg-light border">
-
-                        <a class="btn btn-primary btt" data-bs-target="#modaldemo1" data-bs-toggle="modal" @*onclick="edit('@item.id','@item.Name','@item.Family','@item.Email')"*@ href="javascript:void(0)">edit</a>
-                   </div>
-
-                    <button class="btn btn-primary mt-4 mb-0" type="submit">Submit</button>
-                </div>
-
-            </form>
         </div>
     </div>
 </div>
+
+@*@section Scripts {
+    <script>
+        $("#selectTeachers").click(function () {
+            $("#modaldemo1");
+            var ids = [];
+            $(':checkbox:checked').each(function(i){
+                var checkboxValue = $(this).val()
+                //console.log(checkboxValue)
+                if (checkboxValue !== 'on'){
+                    ids.push(checkboxValue)
+                }
+                //console.log(ids)
+            });
+            ids.each(function(i) {
+                var teacher = $('#teachers').val();
+                teacher.push(ids[i]);
+                console.log(teacher)
+
+            })
+
+        });
+    </script>
+}*@

@@ -21,6 +21,13 @@ namespace CrmSite.Controllers.admin
             ViewBag.Teachers = bll.read();
             return View();
         }
+        public IActionResult getall()
+        {
+            CoursBLL bll = new CoursBLL();
+            ViewBag.Course = bll.getall();
+
+            return View();
+        }
         public IActionResult getskip(int c)
         {
             CoursBLL bll = new CoursBLL();
@@ -34,6 +41,7 @@ namespace CrmSite.Controllers.admin
             t.Title = course.Title;
             t.Descript = course.Descript;
             t.Price = course.Price;
+            t.TotalTime = course.TotalTime;
 
             UploadFile upf = new UploadFile(Environment);
             t.VideoIntro = upf.uploadVideo(course.VideoIntro);
@@ -62,9 +70,13 @@ namespace CrmSite.Controllers.admin
         [HttpGet]
         public IActionResult search(string s)
         {
-            TeacherBLL bll = new TeacherBLL();
-            List<BE.Teacher> ll = bll.search(s);
-            return View("Show", ll);
+            CoursBLL bll = new CoursBLL();
+            List<BE.Course> ll = bll.search(s);
+
+            ViewBag.Course = ll;
+
+
+            return View("getall");
         }
         [HttpPost]
         public IActionResult dele(int id)

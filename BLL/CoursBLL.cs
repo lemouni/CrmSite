@@ -29,9 +29,9 @@ namespace BLL
         {
              dal.update(t);
         }
-        public List<Course> search(List<string> lstsearch)
+        public List<Course> search(string s)
         {
-            return dal.search(lstsearch);
+            return dal.search(s);
         }
         public void delete(int id)
         {
