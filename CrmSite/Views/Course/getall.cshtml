@@ -25,28 +25,38 @@
                             <div class="col-sm-12">
                                  <table class="table table-bordered text-nowrap border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
                                      <thead>
-                                         <tr role="row"><th class="wd-15p border-bottom-0 sorting sorting_asc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First name: activate to sort column descending" style="width: 108.438px;">First name</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" style="width: 102px;">Last name</th><th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 191.469px;">Email</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">Picture</th></tr>
+                                    <tr role="row"><th class="wd-15p border-bottom-0 sorting sorting_asc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First name: activate to sort column descending" style="width: 108.438px;">First name</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" style="width: 102px;">Last name</th><th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 191.469px;">Email</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">Picture</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">video</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">edit</th><th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 108.453px;">delete</th></tr>
                                      </thead>
                                      <tbody>
                                          @{
                                              foreach (BE.Course item in ViewBag.Course)
                                              {
                                                  <tr>
-                                                     <td style="display:none">@item.id</td>
                                                      <td>@item.Title</td>
                                                      <td>@item.TotalTime</td>
                                                      <td>@item.Descript</td>
                                                      <td>@item.Price</td>
-
-                                                     <td><video src="~/videos/course/@item.VideoIntro" style="width:150px;height:auto" /></td>
                                                      <td>
-
-                                                         <div class="text-center py-4 bg-light border">
-
-                                                         </div>
+                                                            <video width="100" height="70" controls>
+                                                            <source src="@item.VideoIntro" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
                                                      </td>
                                                      <td>
+                                                        <a asp-action="edit" asp-controller="Course" asp-route-id="@item.id">
+                                                         <div class="text-center py-4 bg-light border">
+                                                             <button class="btn btn-primary btt" href="javascript:void(0)">edit</button>
+                                                         </div>
+                                                        </a>
 
+                                                     </td>
+                                                     <td>
+                                                         <form asp-action="dele" method="post">
+                                                             <div class="text-center py-4 bg-light border">
+                                                                 <input type="hidden" name="id" value="@item.id" />
+                                                                 <button class="btn btn" type="submit" href="javascript:void(0)">delete</button>
+                                                             </div>
+                                                         </form>
                                                      </td>
                                                  </tr>
 

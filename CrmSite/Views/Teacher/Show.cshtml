@@ -46,14 +46,14 @@
                                                                <button class="btn btn-primary btt" data-bs-target="#modaldemo1" data-bs-toggle="modal" onclick="edit('@item.id','@item.Name','@item.Family','@item.Email')" href="javascript:void(0)">edit</button>
                                                            </div>
                                                       </td>
-                                                            <td>
-                                                            <form asp-action="dele" method="post">
-                                                                <div class="text-center py-4 bg-light border">
-                                                                    <input type="hidden" name="id" value="@item.id"/>
-                                                                    <button class="btn btn" type="submit" href="javascript:void(0)">delete</button>
-                                                                </div>
-                                                            </form>
-                                                            </td>
+                                                      <td>
+                                                      <form asp-action="dele" method="post">
+                                                          <div class="text-center py-4 bg-light border">
+                                                              <input type="hidden" name="id" value="@item.id"/>
+                                                              <button class="btn btn" type="submit" href="javascript:void(0)">delete</button>
+                                                          </div>
+                                                      </form>
+                                                      </td>
                                                   </tr>
                                   
                                           }

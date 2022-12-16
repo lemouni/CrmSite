@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BE;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -48,16 +49,35 @@ namespace DAL
         public List<Course> search(string s)
         {
 
-                DB db = new DB();
-                var q = from i in db.Courses
-                        where i.Title.Contains(s)
-                        select i;
+            //    DB db = new DB();
+            //    var q = from i in db.Courses
+            //            where i.Title.Contains(s)
+            //            select i;
+
+
+            //return q.ToList();
+
+            int n = 0;
+
+            DB db = new DB();
+            var q = from i in db.Courses
+                    where i.Title.Contains(s.ToString()) || (int.TryParse(s,out n) ? i.Price ==n : false)
+                    select i;
 
 
             return q.ToList();
         }
 
+        public Course search(int id)
+        {
+            DB db = new DB();
+            var q = from i in db.Courses.Include(s=>s.Teacher_Courses).ThenInclude(s=>s.Teacher)
+                    where i.id==id
+                    select i;
 
+
+            return q.SingleOrDefault();
+        }
         public void delete(int id)
         {
             DB db = new DB();

@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using BE;
 using Microsoft.AspNetCore.Hosting;
+using System.Linq;
+using DAL;
 
 namespace CrmSite.Controllers.admin
 {
@@ -28,26 +30,60 @@ namespace CrmSite.Controllers.admin
 
             return View();
         }
+        public IActionResult edit(int id)
+        {
+            CoursBLL blc = new CoursBLL();
+            var becourse = blc.search(id);
+
+            TeacherBLL bll = new TeacherBLL();
+            ViewBag.Teachers = bll.read();
+
+            var modelcourse = new Models.Course
+            {
+                Title = becourse.Title,
+                Price = becourse.Price,
+                Descript = becourse.Descript,
+                TotalTime = becourse.TotalTime,
+                videoUrl = becourse.VideoIntro,
+                id = becourse.id,
+                teachers = becourse.Teacher_Courses.Select(s => s.Teacher.id).ToList()
+            };
+
+            return View(modelcourse);
+        }
         public IActionResult getskip(int c)
         {
             CoursBLL bll = new CoursBLL();
             return View("Show", bll.getskip(c));
         }
+        public IActionResult edit(Models.Course course)
+        {
+
+        }
+
         [HttpPost]
         public IActionResult create(Models.Course course)
         {
+            TeacherBLL bllt = new TeacherBLL();
+
             CoursBLL bll = new CoursBLL();
             BE.Course t = new BE.Course();
             t.Title = course.Title;
             t.Descript = course.Descript;
             t.Price = course.Price;
             t.TotalTime = course.TotalTime;
-
+            
             UploadFile upf = new UploadFile(Environment);
             t.VideoIntro = upf.uploadVideo(course.VideoIntro);
 
             bll.create(t);
 
+            DB db = new DB();
+            foreach (var item in course.teachers)
+            {
+                db.Teacher_Courses.Add(new Teacher_Course { Teacherid = item, Courseid = t.id });
+            db.SaveChanges();
+            }
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
@@ -81,9 +117,9 @@ namespace CrmSite.Controllers.admin
         [HttpPost]
         public IActionResult dele(int id)
         {
-            TeacherBLL bll = new TeacherBLL();
+            CoursBLL bll = new CoursBLL();
             bll.delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(getall));
 
         }
     }

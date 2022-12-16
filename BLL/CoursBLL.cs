@@ -33,6 +33,10 @@ namespace BLL
         {
             return dal.search(s);
         }
+        public Course search(int id)
+        {
+            return dal.search(id);
+        }
         public void delete(int id)
         {
              dal.delete(id);
