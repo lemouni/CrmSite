@@ -56,9 +56,37 @@ namespace CrmSite.Controllers.admin
             CoursBLL bll = new CoursBLL();
             return View("Show", bll.getskip(c));
         }
-        public IActionResult edit(Models.Course course)
+        public IActionResult Edit1(Models.Course course)
         {
+            CoursBLL blc = new CoursBLL();
+            var becourse = blc.search(course.id);
 
+            becourse.id = course.id;
+            becourse.Title = course.Title;
+            becourse.Price = course.Price;
+            becourse.Descript = course.Descript;
+            becourse.TotalTime = course.TotalTime;
+
+            if (course.VideoIntro != null)
+            {
+                UploadFile uf = new UploadFile(Environment);
+                becourse.VideoIntro = uf.uploadVideo(course.VideoIntro);
+            }
+
+            blc.update(becourse);
+
+
+            DB db = new DB();
+            List<Teacher_Course> tc = blc.listteachercourse(course.id);
+            db.Teacher_Courses.RemoveRange(tc);
+            db.SaveChanges();
+            foreach (var item in course.teachers)
+            {
+                db.Teacher_Courses.Add(new Teacher_Course { Teacherid = item, Courseid = becourse.id });
+                db.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(getall));
         }
 
         [HttpPost]

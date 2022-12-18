@@ -88,5 +88,13 @@ namespace DAL
             db.Remove(tt);
             db.SaveChanges();
         }
+        public List<Teacher_Course> listteachercourse(int id)
+        {
+            DB db = new DB();
+            var q = db.Teacher_Courses.Where(s => s.Courseid == id).ToList();
+
+
+            return q.ToList();
+        }
     }
 }

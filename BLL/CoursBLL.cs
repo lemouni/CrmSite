@@ -41,6 +41,10 @@ namespace BLL
         {
              dal.delete(id);
         }
+        public List<Teacher_Course> listteachercourse(int id)
+        {
+            return dal.listteachercourse(id);
+        }
 
     }
 }
